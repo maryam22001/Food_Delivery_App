@@ -1,0 +1,22 @@
+service: foodie-lambda
+provider:
+  name: aws
+  runtime: python3.11
+  region: eu-central-1
+  environment:
+    DATABASE_URL: ${env:DATABASE_URL}
+    STRIPE_SECRET_KEY: ${env:STRIPE_SECRET_KEY}
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+custom:
+  pythonRequirements:
+    dockerizePip: true
+  wsgi:
+    app: backend.wsgi.application
+functions:
+  app:
+    handler: wsgi_handler.handler
+    events:
+      - http: ANY /
+      - http: ANY /{proxy+}
