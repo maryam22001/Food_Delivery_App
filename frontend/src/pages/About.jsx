@@ -4,7 +4,7 @@ import { Users, Target, Award, Truck, Clock, Shield, Heart, Star } from 'lucide-
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const About = () => {
+const About = ({ user, onSignOut }) => {
   const stats = [
     { icon: Users, label: "Happy Customers", value: "50,000+" },
     { icon: Truck, label: "Restaurant Partners", value: "500+" },
@@ -67,7 +67,7 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header cartItems={1} />
+      <Header cartItems={1} user={user} onSignOut={onSignOut} />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-20">

@@ -8,12 +8,12 @@ import Categories from './Categories';
 import Footer from './Footer';
 import { useCart } from '../hooks/useCart';
 
-const FoodDashWebsite = () => {
+const FoodDashWebsite = ({ user, onSignOut }) => {
   const { cartItems, addToCart } = useCart();
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
-      <Header cartItems={cartItems} />
+      <Header cartItems={cartItems} user={user} onSignOut={onSignOut} />
       <HeroSection onAddToCart={addToCart} />
       <HowItWorks />
       <Categories />

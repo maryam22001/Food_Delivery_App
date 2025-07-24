@@ -1,6 +1,7 @@
 // Footer section component
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // Footer Component
 
@@ -11,21 +12,23 @@ const Footer = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2rem' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-              <div style={{
-                width: '2rem',
-                height: '2rem',
-                backgroundColor: '#f97316',
-                borderRadius: '0.25rem',
-                color: 'white',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 'bold',
-                fontSize: '0.875rem'
-              }}>
-                FD
-              </div>
-              <span style={{ marginLeft: '0.75rem', fontSize: '1.25rem', fontWeight: 'bold' }}>FoodDash</span>
+              <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                <div style={{
+                  width: '2rem',
+                  height: '2rem',
+                  backgroundColor: '#f97316',
+                  borderRadius: '0.25rem',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 'bold',
+                  fontSize: '0.875rem'
+                }}>
+                  FD
+                </div>
+                <span style={{ marginLeft: '0.75rem', fontSize: '1.25rem', fontWeight: 'bold', color: 'white' }}>FoodDash</span>
+              </Link>
             </div>
             <p style={{ color: '#9ca3af', marginBottom: '1rem', fontSize: '0.875rem', lineHeight: '1.6' }}>
               Your favorite food delivered fresh and fast. Experience the best of local cuisine from the comfort of your home.
@@ -36,19 +39,19 @@ const Footer = () => {
             <h3 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>Quick Links</h3>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: '#9ca3af', fontSize: '0.875rem' }}>
               <li style={{ marginBottom: '0.5rem' }}>
-                <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Home</a>
+                <Link to="/" style={{ color: '#9ca3af', textDecoration: 'none' }}>Home</Link>
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Restaurants</a>
+                <Link to="/restaurants" style={{ color: '#9ca3af', textDecoration: 'none' }}>Restaurants</Link>
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Categories</a>
+                <Link to="/categories" style={{ color: '#9ca3af', textDecoration: 'none' }}>Categories</Link>
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>About Us</a>
+                <Link to="/about" style={{ color: '#9ca3af', textDecoration: 'none' }}>About Us</Link>
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Contact</a>
+                <Link to="/contact" style={{ color: '#9ca3af', textDecoration: 'none' }}>Contact</Link>
               </li>
             </ul>
           </div>

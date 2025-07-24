@@ -6,7 +6,7 @@ import { featuredRestaurants } from '../utils/constants';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const Restaurants = () => {
+const Restaurants = ({ user, onSignOut }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('rating');
@@ -82,7 +82,7 @@ const Restaurants = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header cartItems={1} />
+      <Header cartItems={1} user={user} onSignOut={onSignOut} />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-12">

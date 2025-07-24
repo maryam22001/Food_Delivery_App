@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import RestaurantCard from '../components/cards/RestaurantCard';
 import { categories, featuredRestaurants } from '../utils/constants';
 
-const Categories = () => {
+const Categories = ({ user, onSignOut }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   // Extended categories with more details
@@ -73,7 +73,7 @@ const Categories = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header cartItems={1} />
+      <Header cartItems={1} user={user} onSignOut={onSignOut} />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-16">
