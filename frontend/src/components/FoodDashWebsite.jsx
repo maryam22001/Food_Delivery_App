@@ -12,7 +12,7 @@ const FoodDashWebsite = () => {
   const { cartItems, addToCart } = useCart();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
       <Header cartItems={cartItems} />
       <HeroSection onAddToCart={addToCart} />
       <HowItWorks />
@@ -22,6 +22,7 @@ const FoodDashWebsite = () => {
     </div>
   );
 };
+
 
 
 

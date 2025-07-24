@@ -1,69 +1,140 @@
 // Featured restaurants section component
 import React from 'react';
-import RestaurantCard from './cards/RestaurantCard';
-import { featuredRestaurants } from  '../utils/constants';
-
+import { Star, Clock, Heart } from 'lucide-react';
+import { featuredRestaurants } from '../utils/constants';
 
 // Featured Restaurants Component
 const FeaturedRestaurants = () => {
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Featured Restaurants</h2>
-          <p className="text-lg text-gray-600">
+    <section style={{ padding: '4rem 0', backgroundColor: '#f9fafb' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h2 style={{
+            fontSize: '2.25rem',
+            fontWeight: 'bold',
+            color: '#111827',
+            marginBottom: '1rem'
+          }}>
+            Featured Restaurants
+          </h2>
+          <p style={{ fontSize: '1.125rem', color: '#4b5563' }}>
             Handpicked restaurants with the best ratings and fastest delivery times
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
           {featuredRestaurants.map((restaurant) => (
-            <div key={restaurant.id} className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden">
-              <div className="relative">
+            <div key={restaurant.id} style={{
+              backgroundColor: 'white',
+              borderRadius: '0.75rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              overflow: 'hidden',
+              transition: 'all 0.3s'
+            }}>
+              <div style={{ position: 'relative' }}>
                 {restaurant.discount && (
-                  <div className="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold z-10">
+                  <div style={{
+                    position: 'absolute',
+                    top: '0.75rem',
+                    left: '0.75rem',
+                    backgroundColor: '#dc2626',
+                    color: 'white',
+                    padding: '0.25rem 0.5rem',
+                    borderRadius: '9999px',
+                    fontSize: '0.75rem',
+                    fontWeight: 'bold',
+                    zIndex: 10
+                  }}>
                     {restaurant.discount}
                   </div>
                 )}
                 {restaurant.isNew && (
-                  <div className="absolute top-3 right-3 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold z-10">
+                  <div style={{
+                    position: 'absolute',
+                    top: '0.75rem',
+                    right: '0.75rem',
+                    backgroundColor: '#f97316',
+                    color: 'white',
+                    padding: '0.25rem 0.5rem',
+                    borderRadius: '9999px',
+                    fontSize: '0.75rem',
+                    fontWeight: 'bold',
+                    zIndex: 10
+                  }}>
                     New!
                   </div>
                 )}
                 {restaurant.featured && (
-                  <div className="absolute bottom-3 left-3 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '0.75rem',
+                    left: '0.75rem',
+                    backgroundColor: '#eab308',
+                    color: 'white',
+                    padding: '0.25rem 0.5rem',
+                    borderRadius: '9999px',
+                    fontSize: '0.75rem',
+                    fontWeight: 'bold'
+                  }}>
                     Featured
                   </div>
                 )}
-                <button className="absolute top-3 right-3 bg-white rounded-full p-2 shadow hover:bg-gray-50 z-10">
-                  <Heart className="w-4 h-4 text-gray-600" />
+                <button style={{
+                  position: 'absolute',
+                  top: '0.75rem',
+                  right: '0.75rem',
+                  backgroundColor: 'white',
+                  borderRadius: '50%',
+                  padding: '0.5rem',
+                  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  zIndex: 10
+                }}>
+                  <Heart style={{ width: '1rem', height: '1rem', color: '#4b5563' }} />
                 </button>
-                
-                <div className="h-40 bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center">
-                  <div className="text-6xl opacity-40">
+
+                <div style={{
+                  height: '10rem',
+                  background: 'linear-gradient(to bottom right, #fed7aa, #fff7ed)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ fontSize: '3.75rem', opacity: 0.4 }}>
                     {restaurant.emoji}
                   </div>
                 </div>
               </div>
-              
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-1">{restaurant.name}</h3>
-                <p className="text-gray-600 text-sm mb-3">{restaurant.cuisine}</p>
-                
-                <div className="flex items-center justify-between mb-3 text-sm">
-                  <div className="flex items-center">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current mr-1" />
-                    <span className="font-bold">{restaurant.rating}</span>
-                    <span className="text-gray-500 ml-1">({restaurant.reviews})</span>
+
+              <div style={{ padding: '1rem' }}>
+                <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '0.25rem' }}>{restaurant.name}</h3>
+                <p style={{ color: '#4b5563', fontSize: '0.875rem', marginBottom: '0.75rem' }}>{restaurant.cuisine}</p>
+
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '0.75rem',
+                  fontSize: '0.875rem'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Star style={{ width: '1rem', height: '1rem', color: '#fbbf24', fill: '#fbbf24', marginRight: '0.25rem' }} />
+                    <span style={{ fontWeight: 'bold' }}>{restaurant.rating}</span>
+                    <span style={{ color: '#6b7280', marginLeft: '0.25rem' }}>({restaurant.reviews})</span>
                   </div>
-                  <div className="flex items-center text-gray-600">
-                    <Clock className="w-4 h-4 mr-1" />
+                  <div style={{ display: 'flex', alignItems: 'center', color: '#4b5563' }}>
+                    <Clock style={{ width: '1rem', height: '1rem', marginRight: '0.25rem' }} />
                     <span>{restaurant.deliveryTime}</span>
                   </div>
                 </div>
-                
-                <div className="flex items-center justify-between">
-                  <span className={`text-sm font-semibold ${restaurant.deliveryFee === 'Free delivery' ? 'text-green-600' : 'text-gray-800'}`}>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    color: restaurant.deliveryFee === 'Free delivery' ? '#059669' : '#111827'
+                  }}>
                     {restaurant.deliveryFee}
                   </span>
                 </div>
@@ -75,4 +146,6 @@ const FeaturedRestaurants = () => {
     </section>
   );
 };
+
+
 export default FeaturedRestaurants;

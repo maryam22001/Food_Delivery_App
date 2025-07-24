@@ -5,61 +5,98 @@ import { Clock, Star, Truck } from 'lucide-react';
 
 
 /// Hero Section Component
-const HeroSection = () => {
+const HeroSection = ({ onAddToCart }) => {
   return (
-    <section className="bg-orange-50 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section style={{ backgroundColor: '#fff7ed', padding: '4rem 0' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center' }}>
           <div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 style={{
+              fontSize: '3rem',
+              fontWeight: 'bold',
+              color: '#111827',
+              lineHeight: '1.2',
+              marginBottom: '1.5rem'
+            }}>
               Delicious food{' '}
-              <span className="text-orange-500">delivered</span>{' '}
+              <span style={{ color: '#f97316' }}>delivered</span>{' '}
               to your door
             </h1>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+            <p style={{
+              fontSize: '1.125rem',
+              color: '#4b5563',
+              marginBottom: '2rem',
+              lineHeight: '1.6'
+            }}>
               Order from your favorite restaurants and get fresh, hot meals delivered in minutes. Fast, reliable, and always delicious.
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <button className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors">
+
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem' }}>
+              <button
+                onClick={onAddToCart}
+                style={{
+                  backgroundColor: '#f97316',
+                  color: 'white',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '0.5rem',
+                  fontWeight: '600',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '1rem'
+                }}
+              >
                 Order Now →
               </button>
-              <button className="border border-orange-500 text-orange-500 px-8 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-colors">
+              <button style={{
+                border: '1px solid #f97316',
+                color: '#f97316',
+                padding: '0.75rem 2rem',
+                borderRadius: '0.5rem',
+                fontWeight: '600',
+                backgroundColor: 'transparent',
+                cursor: 'pointer',
+                fontSize: '1rem'
+              }}>
                 Browse Menu
               </button>
             </div>
-            
-            <div className="grid grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <Clock className="w-5 h-5 text-orange-500 mr-2" />
-                  <span className="text-2xl font-bold text-gray-900">30min</span>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.5rem' }}>
+                  <Clock style={{ width: '1.25rem', height: '1.25rem', color: '#f97316', marginRight: '0.5rem' }} />
+                  <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#111827' }}>30min</span>
                 </div>
-                <p className="text-sm text-gray-600">Average delivery</p>
+                <p style={{ fontSize: '0.875rem', color: '#4b5563' }}>Average delivery</p>
               </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <Star className="w-5 h-5 text-orange-500 mr-2" />
-                  <span className="text-2xl font-bold text-gray-900">4.8</span>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.5rem' }}>
+                  <Star style={{ width: '1.25rem', height: '1.25rem', color: '#f97316', marginRight: '0.5rem' }} />
+                  <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#111827' }}>4.8</span>
                 </div>
-                <p className="text-sm text-gray-600">Customer rating</p>
+                <p style={{ fontSize: '0.875rem', color: '#4b5563' }}>Customer rating</p>
               </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <Truck className="w-5 h-5 text-orange-500 mr-2" />
-                  <span className="text-2xl font-bold text-gray-900">500+</span>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.5rem' }}>
+                  <Truck style={{ width: '1.25rem', height: '1.25rem', color: '#f97316', marginRight: '0.5rem' }} />
+                  <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#111827' }}>500+</span>
                 </div>
-                <p className="text-sm text-gray-600">Restaurants</p>
+                <p style={{ fontSize: '0.875rem', color: '#4b5563' }}>Restaurants</p>
               </div>
             </div>
           </div>
-          
-          <div className="flex justify-center">
-            <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Delicious Food" 
-                className="w-full max-w-lg rounded-2xl shadow-lg"
+
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ position: 'relative' }}>
+              <img
+                src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                alt="Delicious Food"
+                style={{
+                  width: '100%',
+                  maxWidth: '32rem',
+                  borderRadius: '1rem',
+                  boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+                }}
               />
             </div>
           </div>
@@ -68,5 +105,4 @@ const HeroSection = () => {
     </section>
   );
 };
-
 export default HeroSection;

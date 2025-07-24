@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Search, MapPin, ShoppingCart, User, Clock, Star, Truck, Phone, Mail, Heart } from 'lucide-react';
-
 // Custom hook for cart functionality
-const USE_CART = () => {
+import { useState } from 'react';
+
+export const useCart = () => {
   const [cartItems, setCartItems] = useState(1);
   
   const addToCart = () => {

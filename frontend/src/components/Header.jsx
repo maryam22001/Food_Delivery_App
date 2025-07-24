@@ -2,52 +2,128 @@
 import React from 'react';
 import { Search, MapPin, ShoppingCart, User } from 'lucide-react';
 
-// Header Component
+
+const headerStyle = {
+  backgroundColor: '#ffffff',
+  borderBottom: '1px solid #e5e7eb',
+  padding: '1rem 0',
+};
+
+const containerStyle = {
+  maxWidth: '1200px',
+  margin: '0 auto',
+  padding: '0 1rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+const flexStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1rem',
+};
+
 const Header = ({ cartItems }) => {
   return (
-    <header className="bg-white shadow-sm border-b">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <div className="w-8 h-8 bg-orange-500 rounded text-white flex items-center justify-center font-bold text-sm">
+    <header style={headerStyle}>
+      <div style={containerStyle}>
+        <div style={flexStyle}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{
+                width: '2rem',
+                height: '2rem',
+                backgroundColor: '#f97316',
+                borderRadius: '0.25rem',
+                color: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold',
+                fontSize: '0.875rem'
+              }}>
                 FD
               </div>
-              <span className="ml-3 text-xl font-bold text-gray-900">FoodDash</span>
+              <span style={{
+                marginLeft: '0.75rem',
+                fontSize: '1.25rem',
+                fontWeight: 'bold',
+                color: '#111827'
+              }}>
+                FoodDash
+              </span>
             </div>
-            <nav className="hidden md:ml-8 md:flex md:space-x-6">
-              <a href="#" className="text-gray-900 hover:text-orange-500 px-3 py-2 text-sm font-medium">Home</a>
-              <a href="#" className="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Restaurants</a>
-              <a href="#" className="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Categories</a>
-              <a href="#" className="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">About</a>
-            </nav>
           </div>
-          
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center bg-gray-50 rounded-lg px-4 py-2 max-w-sm w-full">
-              <Search className="w-4 h-4 text-gray-400 mr-3" />
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              backgroundColor: '#f9fafb',
+              borderRadius: '0.5rem',
+              padding: '0.5rem 1rem',
+              maxWidth: '24rem',
+              width: '100%'
+            }}>
+              <Search style={{ width: '1rem', height: '1rem', color: '#9ca3af', marginRight: '0.75rem' }} />
               <input
                 type="text"
                 placeholder="Search restaurants, cuisines..."
-                className="bg-transparent border-none outline-none text-sm flex-1 placeholder-gray-500"
+                style={{
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  fontSize: '0.875rem',
+                  flex: 1,
+                  color: '#6b7280'
+                }}
               />
             </div>
-            
-            <div className="flex items-center text-sm text-gray-600">
-              <MapPin className="w-4 h-4 mr-1 text-orange-500" />
-              <span className="hidden sm:inline">Downtown</span>
+
+            <div style={{ display: 'flex', alignItems: 'center', fontSize: '0.875rem', color: '#4b5563' }}>
+              <MapPin style={{ width: '1rem', height: '1rem', marginRight: '0.25rem', color: '#f97316' }} />
+              <span>Downtown</span>
             </div>
-            
-            <button className="relative p-2 text-gray-600 hover:text-orange-500">
-              <ShoppingCart className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+
+            <button style={{
+              position: 'relative',
+              padding: '0.5rem',
+              color: '#4b5563',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer'
+            }}>
+              <ShoppingCart style={{ width: '1.25rem', height: '1.25rem' }} />
+              <span style={{
+                position: 'absolute',
+                top: '-0.25rem',
+                right: '-0.25rem',
+                backgroundColor: '#f97316',
+                color: 'white',
+                fontSize: '0.75rem',
+                borderRadius: '9999px',
+                width: '1.25rem',
+                height: '1.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold'
+              }}>
                 {cartItems}
               </span>
             </button>
-            
-            <button className="flex items-center text-gray-600 hover:text-orange-500">
-              <User className="w-4 h-4 mr-1" />
-              <span className="hidden sm:inline text-sm">Sign In</span>
+
+            <button style={{
+              display: 'flex',
+              alignItems: 'center',
+              color: '#4b5563',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer'
+            }}>
+              <User style={{ width: '1rem', height: '1rem', marginRight: '0.25rem' }} />
+              <span style={{ fontSize: '0.875rem' }}>Sign In</span>
             </button>
           </div>
         </div>
@@ -55,4 +131,5 @@ const Header = ({ cartItems }) => {
     </header>
   );
 };
+
 export default Header;
