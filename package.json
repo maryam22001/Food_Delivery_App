@@ -9,8 +9,13 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "dependencies": {
+    "react": "^18.3.1",
+    "lucide-react": "^0.525.0"
+  },
   "devDependencies": {
     "serverless-python-requirements": "^6.1.2",
     "serverless-wsgi": "^3.1.0"
   }
 }
+

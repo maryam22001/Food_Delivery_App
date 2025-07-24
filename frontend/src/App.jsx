@@ -20,15 +20,21 @@ function App() {
       ApiService.setToken(token);
       // Validate token with backend
       ApiService.validateToken()
-      .then(data => {
-        setUser(data.user);
-      })
-      .catch(() => {
-        ApiService.setToken(null);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+        .then(data => {
+          if (data && data.user) {
+            setUser(data.user);
+          } else {
+            // If no user data is returned, clear the token
+            ApiService.setToken(null);
+          }
+        })
+        .catch(error => {
+          console.error('Token validation error:', error);
+          ApiService.setToken(null);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     } else {
       setIsLoading(false);
     }

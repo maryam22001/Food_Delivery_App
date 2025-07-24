@@ -1,8 +1,17 @@
 // Custom hook for cart functionality
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const useCart = () => {
-  const [cartItems, setCartItems] = useState(1);
+  // Initialize cart from localStorage or default to 0
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem('cartItems');
+    return savedCart ? parseInt(savedCart, 10) : 0;
+  });
+  
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('cartItems', cartItems.toString());
+  }, [cartItems]);
   
   const addToCart = () => {
     setCartItems(prev => prev + 1);
@@ -12,9 +21,14 @@ export const useCart = () => {
     setCartItems(prev => Math.max(0, prev - 1));
   };
   
+  const clearCart = () => {
+    setCartItems(0);
+  };
+  
   return {
     cartItems,
     addToCart,
-    removeFromCart
+    removeFromCart,
+    clearCart
   };
 };

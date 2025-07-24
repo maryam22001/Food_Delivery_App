@@ -9,12 +9,20 @@ import Footer from './Footer';
 import { useCart } from '../hooks/useCart';
 
 const FoodDashWebsite = ({ user, onSignOut }) => {
-  const { cartItems, addToCart } = useCart();
+  const { cartItems, addToCart, removeFromCart, clearCart } = useCart();
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
-      <Header cartItems={cartItems} user={user} onSignOut={onSignOut} />
-      <HeroSection onAddToCart={addToCart} />
+      <Header 
+        cartItems={cartItems} 
+        user={user} 
+        onSignOut={onSignOut} 
+        clearCart={clearCart}
+      />
+      <HeroSection 
+        onAddToCart={addToCart} 
+        onRemoveFromCart={removeFromCart}
+      />
       <HowItWorks />
       <Categories />
       <FeaturedRestaurants />
@@ -22,8 +30,5 @@ const FoodDashWebsite = ({ user, onSignOut }) => {
     </div>
   );
 };
-
-
-
 
 export default FoodDashWebsite;

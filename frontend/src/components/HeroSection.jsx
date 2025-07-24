@@ -4,8 +4,8 @@ import { Clock, Star, Truck } from 'lucide-react';
 
 
 
-/// Hero Section Component
-const HeroSection = ({ onAddToCart }) => {
+// Hero Section Component
+const HeroSection = ({ onAddToCart, onRemoveFromCart }) => {
   return (
     <section style={{ backgroundColor: '#fff7ed', padding: '4rem 0' }}>
       <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1rem' }}>
@@ -47,9 +47,24 @@ const HeroSection = ({ onAddToCart }) => {
               >
                 Order Now →
               </button>
+              <button 
+                onClick={onRemoveFromCart}
+                style={{
+                  border: '1px solid #f97316',
+                  color: '#f97316',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '0.5rem',
+                  fontWeight: '600',
+                  backgroundColor: 'transparent',
+                  cursor: 'pointer',
+                  fontSize: '1rem'
+                }}
+              >
+                Remove Item
+              </button>
               <button style={{
-                border: '1px solid #f97316',
-                color: '#f97316',
+                border: '1px solid #4b5563',
+                color: '#4b5563',
                 padding: '0.75rem 2rem',
                 borderRadius: '0.5rem',
                 fontWeight: '600',

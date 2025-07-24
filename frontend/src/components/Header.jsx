@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Search, MapPin, ShoppingCart, User, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const Header = ({ cartItems, user, onSignOut }) => {
+const Header = ({ cartItems, user, onSignOut, clearCart }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -119,14 +119,18 @@ const Header = ({ cartItems, user, onSignOut }) => {
           </div>
 
           {/* Cart */}
-          <button style={{
-            position: 'relative',
-            padding: '0.5rem',
-            color: '#4b5563',
-            backgroundColor: 'transparent',
-            border: 'none',
-            cursor: 'pointer'
-          }}>
+          <button 
+            onClick={cartItems > 0 ? clearCart : undefined}
+            style={{
+              position: 'relative',
+              padding: '0.5rem',
+              color: '#4b5563',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: cartItems > 0 ? 'pointer' : 'default'
+            }}
+            title={cartItems > 0 ? "Clear cart" : "Cart is empty"}
+          >
             <ShoppingCart style={{ width: '1.25rem', height: '1.25rem' }} />
             {cartItems > 0 && (
               <span style={{
