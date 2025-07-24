@@ -12,15 +12,17 @@ const FoodDashWebsite = () => {
   const { cartItems, addToCart } = useCart();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <Header cartItems={cartItems} />
       <HeroSection onAddToCart={addToCart} />
       <HowItWorks />
-      <FeaturedRestaurants />
       <Categories />
+      <FeaturedRestaurants />
       <Footer />
     </div>
   );
 };
+
+
 
 export default FoodDashWebsite;
