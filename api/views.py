@@ -72,6 +72,7 @@ def signout(request):
     return Response({'message': 'Successfully signed out'})
 
 class RestaurantListView(generics.ListAPIView):
+<<<<<<< HEAD
     queryset = Restaurant.objects.filter(is_active=True)
     serializer_class = RestaurantSerializer
     permission_classes = [AllowAny]
@@ -121,4 +122,6 @@ def test_checkout(request):
         success_url='http://localhost:5173/success',
         cancel_url='http://localhost:5173/cancel',
     )
+=======
+>>>>>>> 9bf9788 (Add user authentication and profile management: update API routes, models, and frontend components)
     return Response({'url': session.url})

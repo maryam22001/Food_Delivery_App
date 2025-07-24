@@ -287,4 +287,8 @@ const SignUp = ({ onSignUp }) => {
   );
 };
 
+<<<<<<< HEAD
 export default SignUp;
+=======
+export default SignUp;
+>>>>>>> 9bf9788 (Add user authentication and profile management: update API routes, models, and frontend components)

@@ -30,7 +30,11 @@ const Contact = ({ user, onSignOut }) => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
+<<<<<<< HEAD
     } catch (error) {
+=======
+    } catch {
+>>>>>>> 9bf9788 (Add user authentication and profile management: update API routes, models, and frontend components)
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
