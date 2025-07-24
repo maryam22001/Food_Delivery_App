@@ -78,7 +78,6 @@ const Restaurants = ({ user, onSignOut }) => {
     }
   });
 
-<<<<<<< HEAD
   const cuisines = ['All', ...new Set(allRestaurants.map(r => r.cuisine))];
 
   return (
@@ -203,6 +202,4 @@ const Restaurants = ({ user, onSignOut }) => {
   );
 };
 
-=======
->>>>>>> 9bf9788 (Add user authentication and profile management: update API routes, models, and frontend components)
 export default Restaurants;

@@ -30,16 +30,14 @@ const Contact = ({ user, onSignOut }) => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-<<<<<<< HEAD
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
-=======
-    } catch {
->>>>>>> 9bf9788 (Add user authentication and profile management: update API routes, models, and frontend components)
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
   };
+    
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
@@ -310,6 +308,7 @@ const Contact = ({ user, onSignOut }) => {
       <Footer />
     </div>
   );
-};
+}
+;
 
 export default Contact;

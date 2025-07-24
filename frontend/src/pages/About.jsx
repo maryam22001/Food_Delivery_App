@@ -61,7 +61,7 @@ const About = ({ user, onSignOut }) => {
     { year: "2020", event: "FoodDash Founded", description: "Started with a vision to revolutionize food delivery" }
   ];
 
-<<<<<<< HEAD
+
   return (
     <div className="min-h-screen bg-white">
       <Header cartItems={1} user={user} onSignOut={onSignOut} />
@@ -247,6 +247,5 @@ const About = ({ user, onSignOut }) => {
   );
 };
 
-=======
->>>>>>> 9bf9788 (Add user authentication and profile management: update API routes, models, and frontend components)
+
 export default About;
