@@ -72,7 +72,7 @@ def signout(request):
     return Response({'message': 'Successfully signed out'})
 
 class RestaurantListView(generics.ListAPIView):
-<<<<<<< HEAD
+
     queryset = Restaurant.objects.filter(is_active=True)
     serializer_class = RestaurantSerializer
     permission_classes = [AllowAny]
@@ -122,6 +122,61 @@ def test_checkout(request):
         success_url='http://localhost:5173/success',
         cancel_url='http://localhost:5173/cancel',
     )
-=======
->>>>>>> 9bf9788 (Add user authentication and profile management: update API routes, models, and frontend components)
+
     return Response({'url': session.url})
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.conf import settings
+import json
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+# View to create a Stripe Payment Intent for payment simulation
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_payment_intent(request):
+    try:
+        data = request.data
+        amount = data.get('amount')
+        if not amount:
+            return Response({'error': 'Amount is required'}, status=400)
+        intent = stripe.PaymentIntent.create(
+            amount=int(amount * 100),  # amount in cents
+            currency='usd',
+            payment_method_types=['card'],
+        )
+        return Response({'clientSecret': intent['client_secret']})
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
+
+# Webhook handler to process Stripe events such as payment confirmation
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
+    endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the event
+    if event['type'] == 'payment_intent.succeeded':
+        payment_intent = event['data']['object']
+        # TODO: handle successful payment here (e.g., update order status)
+    elif event['type'] == 'payment_method.attached':
+        payment_method = event['data']['object']
+        # TODO: handle payment method attached event
+
+    return HttpResponse(status=200)

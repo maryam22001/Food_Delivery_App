@@ -19,4 +19,6 @@ urlpatterns = [
     
     # Payments
     path('test-checkout', views.test_checkout, name='test_checkout'),
+    path('create-payment-intent', views.create_payment_intent, name='create_payment_intent'),
+    path('stripe-webhook', views.stripe_webhook, name='stripe_webhook'),
 ]
