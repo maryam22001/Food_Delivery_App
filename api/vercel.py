@@ -1,15 +1,11 @@
 """
-WSGI config for backend project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
+Vercel serverless function handler for API endpoints
 """
-
 import os
 import sys
 from django.core.wsgi import get_wsgi_application
+from django.core.management import execute_from_command_line
+from django.db import connection
 
 # Add the project directory to the Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
@@ -18,14 +14,10 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 
 application = get_wsgi_application()
 
-# Vercel serverless function handler
 def handler(request, context):
     """
-    Vercel serverless function handler
+    Vercel serverless function handler for API endpoints
     """
-    from django.core.management import execute_from_command_line
-    from django.db import connection
-    
     # Run migrations on cold start only
     if not hasattr(handler, '_migrated'):
         try:
@@ -43,4 +35,4 @@ def handler(request, context):
         pass
     
     # Handle the request using Django
-    return application(request, context)
+    return application(request, context) 

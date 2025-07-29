@@ -1,5 +1,5 @@
 // API utility functions for backend communication
-const API_BASE_URL = '/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 class ApiService {
   constructor() {
@@ -31,14 +31,25 @@ class ApiService {
 
     try {
       const response = await fetch(url, config);
+      
+      // Handle non-JSON responses
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Invalid response format');
+      }
+
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Request failed');
+        throw new Error(data.message || data.error || `HTTP ${response.status}: ${response.statusText}`);
       }
 
       return data;
     } catch (error) {
+      // Handle network errors
+      if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        throw new Error('Network error: Unable to connect to the server');
+      }
       throw error;
     }
   }
@@ -52,10 +63,17 @@ class ApiService {
   }
 
   async signIn(credentials) {
-    return this.request('/auth/signin', {
+    const response = await this.request('/auth/signin', {
       method: 'POST',
       body: JSON.stringify(credentials),
     });
+    
+    // Set token if login successful
+    if (response.user && response.user.token) {
+      this.setToken(response.user.token);
+    }
+    
+    return response;
   }
 
   async validateToken() {
@@ -63,9 +81,15 @@ class ApiService {
   }
 
   async signOut() {
-    return this.request('/auth/signout', {
-      method: 'POST',
-    });
+    try {
+      await this.request('/auth/signout', {
+        method: 'POST',
+      });
+    } catch (error) {
+      console.error('Sign out error:', error);
+    } finally {
+      this.setToken(null);
+    }
   }
 
   // Data fetching methods
@@ -92,6 +116,13 @@ class ApiService {
   async createCheckoutSession() {
     return this.request('/test-checkout', {
       method: 'POST',
+    });
+  }
+
+  async createPaymentIntent(amount) {
+    return this.request('/create-payment-intent', {
+      method: 'POST',
+      body: JSON.stringify({ amount }),
     });
   }
 }

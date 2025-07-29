@@ -6,9 +6,10 @@ import {
   useStripe,
   useElements
 } from '@stripe/react-stripe-js';
+import ApiService from '../utils/api';
 
 // Load your publishable key from environment or config
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_test_your_publishable_key_here');
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_your_publishable_key_here');
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -29,53 +30,84 @@ const CheckoutForm = () => {
       return;
     }
 
-    // Call backend to create payment intent
-    const response = await fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // Include auth token if needed
-      },
-      body: JSON.stringify({ amount: 20 }) // amount in dollars
-    });
+    try {
+      // Call backend to create payment intent using the API service
+      const paymentIntentResponse = await ApiService.createPaymentIntent(20); // amount in dollars
 
-    const paymentIntentResponse = await response.json();
-
-    if (paymentIntentResponse.error) {
-      setErrorMessage(paymentIntentResponse.error);
-      setPaymentProcessing(false);
-      return;
-    }
-
-    const clientSecret = paymentIntentResponse.clientSecret;
-
-    // Confirm card payment using Stripe.js
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-      }
-    });
-
-    if (result.error) {
-      setErrorMessage(result.error.message);
-      setPaymentProcessing(false);
-    } else {
-      if (result.paymentIntent.status === 'succeeded') {
-        setPaymentSucceeded(true);
+      if (paymentIntentResponse.error) {
+        setErrorMessage(paymentIntentResponse.error);
         setPaymentProcessing(false);
+        return;
       }
+
+      const clientSecret = paymentIntentResponse.clientSecret;
+
+      // Confirm card payment using Stripe.js
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        }
+      });
+
+      if (result.error) {
+        setErrorMessage(result.error.message);
+        setPaymentProcessing(false);
+      } else {
+        if (result.paymentIntent.status === 'succeeded') {
+          setPaymentSucceeded(true);
+          setPaymentProcessing(false);
+        }
+      }
+    } catch (error) {
+      setErrorMessage(error.message || 'Payment failed. Please try again.');
+      setPaymentProcessing(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button type="submit" disabled={!stripe || paymentProcessing}>
-        {paymentProcessing ? 'Processing...' : 'Pay $20'}
-      </button>
-      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      {paymentSucceeded && <div style={{ color: 'green' }}>Payment succeeded!</div>}
-    </form>
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">Payment Details</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="border border-gray-300 rounded-md p-3">
+          <CardElement 
+            options={{
+              style: {
+                base: {
+                  fontSize: '16px',
+                  color: '#424770',
+                  '::placeholder': {
+                    color: '#aab7c4',
+                  },
+                },
+                invalid: {
+                  color: '#9e2146',
+                },
+              },
+            }}
+          />
+        </div>
+        
+        <button 
+          type="submit" 
+          disabled={!stripe || paymentProcessing}
+          className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        >
+          {paymentProcessing ? 'Processing...' : 'Pay $20'}
+        </button>
+        
+        {errorMessage && (
+          <div className="text-red-600 text-sm bg-red-50 p-3 rounded-md">
+            {errorMessage}
+          </div>
+        )}
+        
+        {paymentSucceeded && (
+          <div className="text-green-600 text-sm bg-green-50 p-3 rounded-md">
+            Payment succeeded! Your order has been confirmed.
+          </div>
+        )}
+      </form>
+    </div>
   );
 };
 
